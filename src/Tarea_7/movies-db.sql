@@ -358,3 +358,34 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2017-06-12 10:09:28
+
+USE movies_db;
+
+-- Ejercicio 1.
+SELECT series.title, genres.name AS genre FROM series JOIN genres ON series.genre_id=genres.id;
+
+-- Ejercicio 2.
+SELECT e.title, a.first_name, a.last_name
+FROM episodes AS e
+INNER JOIN actor_episode AS ae ON e.id = ae.episode_id
+INNER JOIN actors AS a ON ae.actor_id = a.id;
+
+-- Ejercicio 3.
+SELECT a.first_name, a.last_name
+FROM actors AS a
+INNER JOIN movies AS p ON a.favorite_movie_id = p.id
+WHERE p.title LIKE 'La Guerra de las galaxias%';
+
+-- Ejercicio 4.
+SELECT a.first_name, a.last_name
+FROM actors AS a
+INNER JOIN actor_movie AS am ON a.id = am.id
+INNER JOIN movies AS p ON am.movie_id = p.id
+WHERE p.title LIKE 'La Guerra de las galaxias%';
+
+-- Ejercicio 5.
+SELECT g.name AS genero, COUNT(*) AS cantidad_peliculas
+FROM movies AS m
+INNER JOIN genres AS g ON m.genre_id = g.id
+GROUP BY g.name
+ORDER BY cantidad_peliculas DESC;
