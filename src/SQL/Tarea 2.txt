@@ -1,0 +1,33 @@
+SELECT s.title, g.name
+FROM series AS s
+INNER JOIN genres AS g
+ON s.genre_id = g.id;
+
+SELECT a.first_name, a.last_name, e.title
+FROM actors AS a
+INNER JOIN actor_episode
+ON actor_episode.actor_id = a.id
+INNER JOIN episodes AS e
+ON actor_episode.episode_id = e.id;
+
+SELECT a.first_name, a.last_name
+FROM actors AS a
+INNER JOIN movies as m
+ON a.favorite_movie_id = m.id
+WHERE m.title
+LIKE "%La Guerra de las Galaxias%";
+
+SELECT DISTINCT a.first_name, a.last_name
+FROM actors AS a
+INNER JOIN actor_movie
+ON a.id = actor_movie.actor_id
+INNER JOIN movies AS m
+ON actor_movie.movie_id = m.id
+WHERE m.title
+LIKE "%La Guerra de las Galaxias%";
+
+SELECT genres.name, COUNT(*)
+FROM movies AS m
+INNER JOIN genres
+ON m.genre_id = genres.id
+group by genres.name;
